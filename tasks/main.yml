@@ -7,26 +7,17 @@
   include: tasks-webserver-install.yml
 
 - name: "Include detection tasks"
-  include: tasks-teamcity-detect.yml
+  include: tasks-youtrack-detect.yml
 
 - name: "Include clean-up tasks"
-  include: tasks-teamcity-clean.yml
-  when: '"{{ teamcity_installed_version.stdout }}" != "{{ teamcity_version }}" and "{{ config_file.stat.exists }}" == "true"'
+  include: tasks-youtrack-clean.yml
+  when: 'youtrack_status is defined and "{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
 
 - name: "Include config tasks"
   include: tasks-config.yml
 
-- name: "Include teamcity distribution tasks"
-  include: tasks-teamcity-distribution.yml
-
-- name: "Include teamcity service tasks"
-  include: tasks-teamcity-service.yml
-
-- name: "Include mysql connector tasks"
-  include: tasks-mysql-connector.yml
-
-- name: "Include mysql db tasks"
-  include: tasks-mysql-db.yml
+- name: "Include youtrack distribution tasks"
+  include: tasks-youtrack-distribution.yml
 
 - name: "Include vhosts apache2 tasks"
   include: tasks-vhosts-apache2.yml

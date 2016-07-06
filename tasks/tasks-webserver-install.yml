@@ -4,9 +4,9 @@
   become: yes
   become_user: root
   apt:
-    name: "{{ teamcity_webserver }}"
+    name: "{{ youtrack_webserver }}"
     state: installed
-  when: '"{{ teamcity_webserver }}" is defined and "{{ teamcity_webserver }}" == "nginx" or "{{ teamcity_webserver }}" == "apache2"'
+  when: '"{{ youtrack_webserver }}" is defined and "{{ youtrack_webserver }}" == "nginx" or "{{ youtrack_webserver }}" == "apache2"'
 
 - name: "Setup | Scanning for Apache2"
   stat:
