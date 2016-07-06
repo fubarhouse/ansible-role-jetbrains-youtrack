@@ -23,6 +23,8 @@ script:
   - cd tests
   - ansible-playbook ./test.yml -i inventory --syntax-check
   - ansible-playbook -i inventory ./test.yml --sudo -vvvv
+  - sudo service youtrack status
+  - sudo service youtrack version
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
