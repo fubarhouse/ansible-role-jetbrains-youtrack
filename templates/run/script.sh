@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 export HOME=/home/youtrack
 export JAVA_HOME=/etc/alternatives/java
@@ -6,7 +6,7 @@ export JAVA_HOME=/etc/alternatives/java
 NAME=youtrack
 PORT=8112
 USR=/usr/local/$NAME
-JAR=$USR/`ls -Lt $USR/*.jar | grep -o "$NAME-[Linux. YouTrack JAR as a Service. Alternative Method^/]*.jar" | head -1`
+JAR=$USR/`ls -Lt $USR/*.jar | grep -o "$NAME-[[Linux. YouTrack JAR as a Service. Alternative Method^/]]*.jar" | head -1`
 JARFILE=$(ls $USR | grep $NAME | grep .jar);
 LOG=$USR/$NAME-$PORT.log
 PID=$USR/$NAME-$PORT.pid
@@ -24,43 +24,23 @@ d_start() {
 
     PREV_DIR=`pwd`
     cd $USR
-    exec nohup java -Xmx1g -XX:MaxPermSize=250M -Djava.awt.headless=true -jar $JAR/$JARFILE $PORT >> $LOG &> /dev/null
+    exec java -Xmx1g -XX:MaxPermSize=250M -Djava.awt.headless=true -jar /usr/local/youtrack/youtrack-6.5.17105.jar 8112
     echo $! > $PID
     cd $PREV_DIR
 }
 
 d_stop() {
-    if [[ -f $PID ]]; then
-        PID_VALUE=`cat $PID`
-        if [[ ! -z "$PID_VALUE" ]]; then
-            PID_VALUE=`ps ax | grep $PID_VALUE | grep -v grep | awk '{print $1}'`
-            if [[ ! -z "$PID_VALUE" ]]; then
-                kill $PID_VALUE
-                WAIT_TIME=0
-                while [[ -n `$(ps ax | grep $PID_VALUE | grep -v grep | wc -l -ne) 0 -a "$WAIT_TIME" -lt 2` ]]; do
-                    sleep 1
-                    WAIT_TIME=$(expr $WAIT_TIME + 1)
-                done
-                if [[ `$(ps ax | grep $PID_VALUE | grep -v grep | wc -l) -ne 0` ]]; then
-                    WAIT_TIME=0
-                    while [[ -n `$(ps ax | grep $PID_VALUE | grep -v grep | wc -l -ne) 0 -a "$WAIT_TIME" -lt 15` ]]; do
-                        sleep 1
-                        WAIT_TIME=$(expr $WAIT_TIME + 1)
-                    done
-                    echo
-                fi
-                if [[ -n `$(ps ax | grep $PID_VALUE | grep -v grep | wc -l -ne) 0` ]]; then
-                    kill -9 $PID_VALUE
-                fi
-            fi
-        fi
-    rm -f $PID
-    fi
+    PID=$(ps ax | grep youtrack | grep java | grep -v grep | cut -d ' ' -f1)
+    kill $PID;
 }
 
 d_version() {
     VERSION=$(ps ax | grep youtrack | grep .jar | cut -d '/' -f3-7 | cut -d ' ' -f1 | cut -d '-' -f2);
-    echo "${VERSION/.jar/}";
+    if [[ -z $VERSION ]] || [[ $VERSION == "" ]]; then
+        echo "Version cannot be detected, try starting the service.";
+    else
+        echo "${VERSION/.jar/}";
+    fi
 }
 
 d_status() {
