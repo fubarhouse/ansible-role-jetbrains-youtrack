@@ -7,7 +7,7 @@
 * Installs Jetbrains' YouTrack on Ubuntu servers
 
 ## Preview
-![screenshot](https://raw.githubusercontent.com/fubarhouse/fubarhouse.youtrack/master/images/screen.png)
+![screenshot](https://raw.githubusercontent.com/fubarhouse/fubarhouse.youtrack/master/images/login-screen.png)
 
 ## Role Variables
 
