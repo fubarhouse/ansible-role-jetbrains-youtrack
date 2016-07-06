@@ -19,20 +19,20 @@ SCRIPT=/usr/local/$NAME/$NAME.sh
 
 d_start() {
     echo "Starting $NAME..."
-    $SCRIPT start
+    start-stop-daemon --start --background -x $SCRIPT start
     exit 0
 }
 
 d_restart() {
     echo "Restarting $NAME..."
-    $SCRIPT stop
-    $SCRIPT start
+    start-stop-daemon --start --background -x $SCRIPT stop
+    start-stop-daemon --start --background -x $SCRIPT start
     exit 0
 }
 
 d_stop() {
     echo "Stopping $NAME..."
-    $SCRIPT stop
+    start-stop-daemon --start --background -x $SCRIPT stop
     exit 0
 }
 
