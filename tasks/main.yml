@@ -29,3 +29,6 @@
 
 - name: "Include webserver restart tasks"
   include: tasks-webserver-restart.yml
+
+- name: "Include youtrack service tasks"
+  include: tasks-youtrack-service.yml
