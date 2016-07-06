@@ -9,8 +9,9 @@
 - name: "Include detection tasks"
   include: tasks-youtrack-detect.yml
 
-#- name: "Include clean-up tasks"
-#  include: tasks-youtrack-clean.yml
+- name: "Include clean-up tasks"
+  include: tasks-youtrack-clean.yml
+  when: 'youtrack_status is defined and "{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
 
 - name: "Include config tasks"
   include: tasks-config.yml
