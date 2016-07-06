@@ -1,0 +1,16 @@
+---
+
+- name: "YouTrack | Looking for initialisation script"
+  stat:
+    path: /etc/init.d/youtrack
+  register: init_file
+
+- name: "YouTrack | Detect installation"
+  shell:  sudo /etc/init.d/youtrack status
+  register: youtrack_status
+  when: '"{{ init_file.stat.exists }}" == true'
+
+- name: "YouTrack | Get version"
+  shell:  sudo /etc/init.d/youtrack version
+  register: youtrack_installed_version
+  when: '"{{ init_file.stat.exists }}" == true'

@@ -1,28 +1,20 @@
 ---
 
-- name: "Config | Set environment"
-  become: yes
-  become_user: root
-  lineinfile:
-    dest: /etc/environment
-    regexp: 'TEAMCITY_DATA_PATH="{{ teamcity_data_dir }}/buildserver"'
-    line: 'TEAMCITY_DATA_PATH="{{ teamcity_data_dir }}/buildserver"'
-
 - name: "Config | Create user group"
   become: yes
   become_user: root
   group:
-    name: teamcity
+    name: youtrack
     state: present
 
 - name: "Config | Add users"
   become: yes
   become_user: root
   user:
-    name: teamcity
+    name: youtrack
     shell: /bin/false
     state: present
-    group: teamcity
+    group: youtrack
 
 - name: "Config | Create directories"
   become: yes
@@ -30,27 +22,19 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: teamcity
-    group: teamcity
+    owner: youtrack
+    group: youtrack
     mode: 0777
     recurse: true
   with_items:
-    - "{{ teamcity_data_dir }}"
-    - "{{ teamcity_data_dir }}/buildserver"
-    - "{{ teamcity_data_dir }}/buildserver/lib"
-    - "{{ teamcity_data_dir }}/buildserver/lib/jdbc"
-    - "/opt/teamcity"
-    - "/opt/teamcity/TeamCity"
-    - "/opt/teamcity/TeamCity/webapps"
-    - "/opt/teamcity/TeamCity/webapps/ROOT"
-    - "/opt/teamcity/TeamCity/webapps/ROOT/WEB-INF"
+    - "{{ youtrack_install_dir }}"
 
 - name: "Config | Copy initialization script"
   become: yes
   become_user: root
   template:
     src: ../templates/initialization/script.sh
-    dest: /etc/init.d/teamcity
+    dest: /etc/init.d/youtrack
     owner: root
     group: root
     mode: 0755
@@ -58,4 +42,14 @@
 - name: "Config | Install intialization script"
   become: yes
   become_user: root
-  shell: update-rc.d teamcity defaults
+  shell: /usr/sbin/update-rc.d youtrack defaults
+
+- name: "Config | Copy runner script"
+  become: yes
+  become_user: root
+  template:
+    src: ../templates/run/script.sh
+    dest: "{{ youtrack_install_dir }}/youtrack.sh"
+    owner: root
+    group: root
+    mode: 0755

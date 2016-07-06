@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Karl Hepworth
-  description: Installs teamcity, continious integration server from Jetbrains
+  description: Installs youtrack, project management software from Jetbrains
   license: MIT
   min_ansible_version: 2.0.0
   platforms:
@@ -10,9 +10,8 @@ galaxy_info:
         - trusty
   galaxy_tags:
     - jetbrains
-    - build server
-    - teamcity
-    - continious integration
+    - team
+    - youtrack
     - ubuntu
   platforms:
   - name: Ubuntu
@@ -34,7 +33,6 @@ galaxy_info:
     versions:
     - all
   categories:
-  - database
   - development
   - system
   - web
