@@ -1,0 +1,15 @@
+---
+
+- name: "YouTrack | Stop service"
+  become: yes
+  become_user: root
+  shell: '/etc/init.d/youtrack stop'
+  when: '"{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
+
+- name: "YouTrack | Uninstall"
+  become: yes
+  become_user: root
+  file:
+    path: "{{ youtrack_install_dir }}"
+    state: absent
+  when: '"{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'

@@ -1,0 +1,9 @@
+---
+
+- name: "YouTrack | Detect installation"
+  shell:  sudo /etc/init.d/youtrack status
+  register: youtrack_status
+
+- name: "YouTrack | Get version"
+  shell:  sudo /etc/init.d/youtrack version
+  register: youtrack_installed_version

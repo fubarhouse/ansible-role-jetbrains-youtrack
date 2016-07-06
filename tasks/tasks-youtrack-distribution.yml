@@ -1,0 +1,9 @@
+---
+
+- name: "YouTrack | Get distribution"
+  get_url:
+    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.jar"
+    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.jar"
+    validate_certs: no
+  tags:
+    - youtrack

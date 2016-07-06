@@ -1,35 +1,30 @@
-# Ansible Role: TeamCity
+# Ansible Role: YouTrack
 
-[![Build Status](https://travis-ci.org/fubarhouse/fubarhouse.teamcity.svg?branch=master)](https://travis-ci.org/fubarhouse/fubarhouse.teamcity)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/fubarhouse.teamcity/master/LICENSE)
+[![Build Status](https://travis-ci.org/fubarhouse/fubarhouse.youtrack.svg?branch=master)](https://travis-ci.org/fubarhouse/fubarhouse.youtrack)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/fubarhouse.youtrack/master/LICENSE)
 
 * Installs Java v7 on Ubuntu servers
-* Installs MySQL on Ubuntu servers
-* Installs Jetbrains' TeamCity on Ubuntu servers
+* Installs Jetbrains' YouTrack on Ubuntu servers
 
 ## Preview
-![screenshot](https://raw.githubusercontent.com/fubarhouse/fubarhouse.teamcity/master/images/login-screen.png)
-
-## Requirements
-
-  * [geerlingguy.java](https://github.com/geerlingguy/ansible-role-java)
+![screenshot](https://raw.githubusercontent.com/fubarhouse/fubarhouse.youtrack/master/images/screen.png)
 
 ## Role Variables
 
-    teamcity_domain: teamcity.vagrant.dev
-    teamcity_version: 9.1.7
-    teamcity_webserver: nginx
-    teamcity_db_user: teamcity
-    teamcity_db_user: 12345
+    youtrack_domain: youtrack.vagrant.dev
+    youtrack_version: 6.5.17057
+    youtrack_webserver: nginx
 
 ## Dependencies
 
-  Dependencies are checked off as the role installs.
+  * [geerlingguy.java](https://github.com/geerlingguy/ansible-role-java)
 
 ## Installation
 
   * Add the role to your playbook.
+  * Execute `ansible-galaxy install geerlingguy.java`
   * Modify above variables as desired.
+  * Run your playbook, or `test.yml` from the tests folder.
 
 ## License
 
@@ -38,6 +33,3 @@ MIT / BSD
 ## Author Information
 
 This role was created in 2016 by [Karl Hepworth](https://twitter.com/fubarhouse).
-
-This role was created due to having unavailable options of success. It was created because I failed to get the galaxy role [sa-teamcity](https://github.com/softasap/sa-teamcity) to work correctly or test correctly. I hope it helps others.
-
