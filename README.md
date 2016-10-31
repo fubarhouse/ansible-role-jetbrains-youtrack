@@ -1,13 +1,13 @@
 # Ansible Role: YouTrack
 
-[![Build Status](https://travis-ci.org/fubarhouse/fubarhouse.youtrack.svg?branch=master)](https://travis-ci.org/fubarhouse/fubarhouse.youtrack)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/fubarhouse.youtrack/master/LICENSE)
+[![Build Status](https://travis-ci.org/fubarhouse/ansible-role-youtrack.svg?branch=master)](https://travis-ci.org/fubarhouse/ansible-role-youtrack)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/ansible-role-youtrack/master/LICENSE)
 
 * Installs Java v7 on Ubuntu servers
 * Installs Jetbrains' YouTrack on Ubuntu servers
 
 ## Preview
-![screenshot](https://raw.githubusercontent.com/fubarhouse/fubarhouse.youtrack/master/images/login-screen.png)
+![screenshot](https://raw.githubusercontent.com/fubarhouse/ansible-role-youtrack/master/images/login-screen.png)
 
 ## Role Variables
 
