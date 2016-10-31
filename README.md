@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/fubarhouse/ansible-role-youtrack.svg?branch=master)](https://travis-ci.org/fubarhouse/ansible-role-youtrack)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/ansible-role-youtrack/master/LICENSE)
 
-* Installs Java v7 on Ubuntu servers
 * Installs Jetbrains' YouTrack on Ubuntu servers
 
 ## Preview
@@ -17,7 +16,7 @@
 
 ## Dependencies
 
-  * [geerlingguy.java](https://github.com/geerlingguy/ansible-role-java)
+  None, but it requires Java to be installed properly as YouTrack is a Java application.
 
 ## Installation
 
