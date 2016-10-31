@@ -12,7 +12,7 @@
 ## Role Variables
 
     youtrack_domain: youtrack.vagrant.dev
-    youtrack_version: 6.5.17057
+    youtrack_version: 7.0.27965
     youtrack_webserver: nginx
 
 ## Dependencies
