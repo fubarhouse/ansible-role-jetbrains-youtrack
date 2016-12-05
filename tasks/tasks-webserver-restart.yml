@@ -1,8 +1,0 @@
----
-
-- name: "Webserver | Restart"
-  become: yes
-  become_user: root
-  service:
-    name: "{{ youtrack_webserver }}"
-    state: restarted

@@ -29,27 +29,10 @@
   with_items:
     - "{{ youtrack_install_dir }}"
 
-- name: "Config | Copy initialization script"
-  become: yes
-  become_user: root
-  template:
-    src: ../templates/initialization/script.sh
-    dest: /etc/init.d/youtrack
-    owner: root
-    group: root
-    mode: 0755
+- name: "Config | Include OS-specific tasks for Debian/Ubuntu"
+  include: tasks-config-debian.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: "Config | Install intialization script"
-  become: yes
-  become_user: root
-  shell: /usr/sbin/update-rc.d youtrack defaults
-
-- name: "Config | Copy runner script"
-  become: yes
-  become_user: root
-  template:
-    src: ../templates/run/script.sh
-    dest: "{{ youtrack_install_dir }}/youtrack.sh"
-    owner: root
-    group: root
-    mode: 0755
+- name: "Config | Include OS-specific tasks for RedHat/CentOS/REHL"
+  include: tasks-config-redhat.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
