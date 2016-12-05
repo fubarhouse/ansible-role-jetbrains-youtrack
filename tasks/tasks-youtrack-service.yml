@@ -14,6 +14,13 @@
     name: youtrack
     state: started
 
+- name: "YouTrack | Re-locate configuration file"
+  stat:
+    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+  register: youtrack_config_recheck
+  failed_when: false
+  when: not youtrack_config.stat.exists
+
 - name: "YouTrack | Setup port in configuration"
   become: yes
   become_user: root
@@ -23,7 +30,7 @@
     replace: "{{ youtrack_port }}"
   tags:
   - youtrack
-  when: not youtrack_config.stat.exists
+  when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists
 
 - name: "YouTrack | Service | Stop (config changed)"
   become: yes
@@ -31,7 +38,7 @@
   service:
     name: youtrack
     state: stopped
-  when: not youtrack_config.stat.exists
+  when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists
 
 - name: "YouTrack | Service | Start (config changed)"
   become: yes
@@ -39,4 +46,4 @@
   service:
     name: youtrack
     state: started
-  when: not youtrack_config.stat.exists
+  when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists
