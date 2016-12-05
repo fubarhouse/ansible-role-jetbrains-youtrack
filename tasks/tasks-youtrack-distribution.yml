@@ -40,12 +40,8 @@
   tags:
   - youtrack
 
-- name: "YouTrack | Setup port in configuration"
-  become: yes
-  become_user: root
-  replace:
-    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
-    regexp: "8080"
-    replace: "{{ youtrack_port }}"
-  tags:
-  - youtrack
+- name: "YouTrack | Locate configuration file"
+  stat:
+    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+  register: youtrack_config
+  failed_when: false
