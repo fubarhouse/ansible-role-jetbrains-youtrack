@@ -3,9 +3,6 @@
 - name: "Include setup tasks"
   include: tasks-initial.yml
 
-- name: "Include webserver installation tasks"
-  include: tasks-webserver-install.yml
-
 - name: "Include detection tasks"
   include: tasks-youtrack-detect.yml
 
@@ -13,22 +10,21 @@
   include: tasks-youtrack-clean.yml
   when: 'youtrack_status is defined and "{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
 
-- name: "Include config tasks"
-  include: tasks-config.yml
-
 - name: "Include youtrack distribution tasks"
   include: tasks-youtrack-distribution.yml
 
-- name: "Include vhosts apache2 tasks"
-  include: tasks-vhosts-apache2.yml
-  when: apache2_is_installed is defined
-
-- name: "Include vhosts nginx tasks"
-  include: tasks-vhosts-nginx.yml
-  when: nginx_is_installed is defined
-
-- name: "Include webserver restart tasks"
-  include: tasks-webserver-restart.yml
+- name: "Include config tasks"
+  include: tasks-config.yml
 
 - name: "Include youtrack service tasks"
   include: tasks-youtrack-service.yml
+
+- name: "YouTrack | Apache vhost tasks"
+  shell: "echo 'notify apache handler'"
+  notify: vhosts-apache
+  when: fubarhouse_webserver is defined and fubarhouse_webserver == 'apache2'
+
+- name: "YouTrack | NGINX vhost tasks"
+  shell: "echo 'notify nginx handler'"
+  notify: vhosts-nginx
+  when: fubarhouse_webserver is defined and fubarhouse_webserver == 'nginx'

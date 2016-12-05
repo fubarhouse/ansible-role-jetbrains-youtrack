@@ -1,0 +1,31 @@
+#!/bin/bash
+
+YOUTRACK_USER=youtrack
+YOUTRACK_VERSION=$(echo {{ youtrack_version }} | cut -d. -f3)
+YOUTRACK_DIR={{ youtrack_install_dir }}/youtrack-$YOUTRACK_VERSION/
+YOUTRACK_PATH=$YOUTRACK_DIR/bin/youtrack.sh
+
+case $1 in
+  start)
+    echo "Starting YouTrack"
+    start-stop-daemon --start -c youtrack --exec $YOUTRACK_PATH start
+    ;;
+  stop)
+    echo "Stopping YouTrack"
+    start-stop-daemon --start -c youtrack  --exec $YOUTRACK_PATH stop
+    ;;
+  restart)
+    echo "Restarting YouTrack"
+    start-stop-daemon --start  -c youtrack --exec $YOUTRACK_PATH stop
+    start-stop-daemon --start  -c youtrack --exec $YOUTRACK_PATH start
+    ;;
+  status)
+    $YOUTRACK_PATH status
+    ;;
+  *)
+    echo "Usage: /etc/init.d/youtrack {start|stop|restart|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

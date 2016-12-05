@@ -1,9 +1,60 @@
 ---
 
 - name: "YouTrack | Get distribution"
+  become: yes
+  become_user: root
   get_url:
-    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.jar"
-    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.jar"
+    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.zip"
+    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.zip"
     validate_certs: no
   tags:
-    - youtrack
+  - youtrack
+
+- name: "YouTrack | Unpack distribution"
+  become: yes
+  become_user: root
+  unarchive:
+    src: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.zip"
+    dest: "{{ youtrack_install_dir }}"
+    copy: "no"
+  tags:
+  - youtrack
+
+- name: "YouTrack | Ensure directory is writable"
+  become: yes
+  become_user: root
+  file:
+    path: "{{ youtrack_install_dir }}"
+    state: directory
+    owner: "{{ fubarhouse_user }}"
+    group: "{{ fubarhouse_user }}"
+    mode: 0755
+    recurse: true
+  tags:
+  - youtrack
+
+- name: "YouTrack | Remove superseded folder"
+  become: yes
+  become_user: root
+  file:
+    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}"
+    state: absent
+  tags:
+  - youtrack
+
+- name: "YouTrack | Specify variable for specific version"
+  shell: "echo {{ youtrack_version }} | cut -d. -f3"
+  register: youtrack_version_stripped
+  failed_when: false
+  tags:
+  - youtrack
+
+- name: "YouTrack | Setup port in configuration"
+  become: yes
+  become_user: root
+  replace:
+    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+    regexp: "8080"
+    replace: "{{ youtrack_port }}"
+  tags:
+  - youtrack

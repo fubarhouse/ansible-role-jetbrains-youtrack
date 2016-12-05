@@ -1,0 +1,40 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:          youtrack
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: YouTrack
+# Description:       YouTrack
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+YOUTRACK_USER=youtrack
+YOUTRACK_VERSION=$(echo {{ youtrack_version }} | cut -d. -f3)
+YOUTRACK_DIR={{ youtrack_install_dir }}/youtrack-$YOUTRACK_VERSION/
+YOUTRACK_PATH=$YOUTRACK_DIR/bin/youtrack.sh
+
+case $1 in
+    start)
+        $YOUTRACK_PATH start
+        ;;
+    stop)
+        $YOUTRACK_PATH stop
+        ;;
+    restart)
+        $YOUTRACK_PATH stop
+        $YOUTRACK_PATH start
+        ;;
+    status)
+        $YOUTRACK_PATH status
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+    ;;
+esac
+exit 0

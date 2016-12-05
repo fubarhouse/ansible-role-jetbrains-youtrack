@@ -1,0 +1,16 @@
+---
+
+- name: "Config | Copy initialization script"
+  become: yes
+  become_user: root
+  template:
+    src: ../templates/redhat.j2
+    dest: /etc/init.d/youtrack
+    owner: root
+    group: root
+    mode: 0755
+
+- name: "Config | Install intialization script"
+  become: yes
+  become_user: root
+  shell: chkconfig youtrack on

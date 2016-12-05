@@ -1,10 +1,9 @@
 ---
 
-# ---
-# Role created from instruction set found on https://confluence.jetbrains.com/display/YTD65/YouTrack+JAR+as+a+Service+on+Linux.+Alternative+Method
-# ---
-#
-
-- hosts: localhost
+- hosts: all
+  sudo: true
   roles:
-    - role: ../../ansible-role-youtrack/
+    - geerlingguy.git
+    - fubarhouse.commons
+    - fubarhouse.curl
+    - role_under_test
