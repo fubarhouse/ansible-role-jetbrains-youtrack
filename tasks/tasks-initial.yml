@@ -15,6 +15,5 @@
     name: "{{ item }}"
     state: installed
   with_items:
-    - php
-    - php-mcrypt
-    - mcrypt
+  - rsync
+  - unzip
