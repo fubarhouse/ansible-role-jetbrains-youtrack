@@ -6,11 +6,11 @@
   register: init_file
 
 - name: "YouTrack | Detect installation"
-  shell:  sudo /etc/init.d/youtrack status
+  shell: /etc/init.d/youtrack status
   register: youtrack_status
   failed_when: false
 
 - name: "YouTrack | Get version"
-  shell:  sudo /etc/init.d/youtrack version
+  shell:  /etc/init.d/youtrack version
   register: youtrack_installed_version
   failed_when: false
