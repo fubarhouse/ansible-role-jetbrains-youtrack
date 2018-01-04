@@ -1,2 +1,12 @@
 ---
 # handlers file for fubarhouse.youtrack
+
+- name: "Stop YouTrack"
+  service:
+    name: youtrack
+    state: stopped
+
+- name: "Start YouTrack"
+  service:
+    name: youtrack
+    state: started

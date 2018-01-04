@@ -19,7 +19,7 @@
     path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
   register: youtrack_config_recheck
   failed_when: false
-  when: not youtrack_config.stat.exists
+  when: youtrack_config.stat.exists|bool == false
 
 - name: "YouTrack | Setup port in configuration"
   become: yes
@@ -28,22 +28,8 @@
     dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
     regexp: "8080"
     replace: "{{ youtrack_port }}"
-  tags:
-  - youtrack
   when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists
-
-- name: "YouTrack | Service | Stop (config changed)"
-  become: yes
-  become_user: root
-  service:
-    name: youtrack
-    state: stopped
-  when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists
-
-- name: "YouTrack | Service | Start (config changed)"
-  become: yes
-  become_user: root
-  service:
-    name: youtrack
-    state: started
-  when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists
+  tags: ['youtrack']
+  notify:
+    - "Stop YouTrack"
+    - "Start YouTrack"
