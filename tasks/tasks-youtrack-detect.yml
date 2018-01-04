@@ -1,16 +1,14 @@
 ---
 
-- name: "YouTrack | Looking for initialisation script"
+- name: "YouTrack | Detect installation"
   stat:
     path: /etc/init.d/youtrack
   register: init_file
-
-- name: "YouTrack | Detect installation"
-  shell: /etc/init.d/youtrack status
-  register: youtrack_status
+  changed_when: false
   failed_when: false
 
 - name: "YouTrack | Get version"
   shell:  /etc/init.d/youtrack version
   register: youtrack_installed_version
+  changed_when: false
   failed_when: false
