@@ -9,11 +9,11 @@
 
 - name: "Include youtrack distribution tasks"
   include: tasks-youtrack-distribution.yml
-  when: init_file.stat.exists|bool == true
+  when: init_file.stat.exists|bool == false
 
 - name: "Include config tasks"
   include: tasks-config.yml
-  when: init_file.stat.exists|bool == true
+  when: init_file.stat.exists|bool == false
 
 - name: "Include youtrack service tasks"
   include: tasks-youtrack-service.yml
