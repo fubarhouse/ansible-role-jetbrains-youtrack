@@ -4,14 +4,6 @@
   sudo: true
   pre_tasks:
 
-    - name: Update yum cache.
-      yum:
-        update_cache: yes
-        state: latest
-      changed_when: false
-      failed_when: false
-      when: ansible_os_family == 'RedHat'
-
     - name: Update apt cache.
       apt:
         update_cache: yes
