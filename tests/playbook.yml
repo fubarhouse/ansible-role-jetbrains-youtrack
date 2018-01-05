@@ -25,6 +25,7 @@
         name: "{{ item }}"
         state: installed
       with_items:
+        - initscripts
         - rsync
         - unzip
       failed_when: false
