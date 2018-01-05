@@ -17,6 +17,7 @@
 
 - name: "Include youtrack service tasks"
   include: tasks-youtrack-service.yml
+  when: init_file.stat.exists|bool == false
 
 - name: "YouTrack | Apache vhost tasks"
   shell: "echo 'notify apache handler'"
