@@ -1,12 +1,11 @@
 ---
 # handlers file for fubarhouse.youtrack
 
-- name: "Stop YouTrack"
-  service:
-    name: youtrack
-    state: stopped
+- name: "Restart YouTrack"
+  shell: /etc/init.d/youtrack restart
 
 - name: "Start YouTrack"
-  service:
-    name: youtrack
-    state: started
+  shell: /etc/init.d/youtrack start
+
+- name: "Stop YouTrack"
+  shell: /etc/init.d/youtrack stop
