@@ -1,20 +1,9 @@
 ---
 # defaults file for fubarhouse.youtrack
 
-# General config - Unless you use your own configurations or have
-# forked this role, changing paths will break the role.
-
-youtrack_install_dir: /usr/local/youtrack
-youtrack_domain: youtrack.vagrant.dev
-youtrack_port: 8114
-
 # YouTrack
 
 youtrack_version: 7.0.27965
-youtrack_webserver: nginx
-
-fubarhouse_vhosts:
-- name: youtrack
-  domain: "{{ youtrack_domain }}"
-  docroot: "{{ youtrack_install_dir }}"
-  port: "{{ youtrack_port }}"
+youtrack_install_dir: /usr/local/youtrack
+youtrack_domain: youtrack.vagrant.dev
+youtrack_port: 8114
