@@ -35,4 +35,4 @@
 
 - name: "Config | Include OS-specific tasks for RedHat/CentOS/REHL"
   include: tasks-config-redhat.yml
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == 'RedHat'
