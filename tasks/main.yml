@@ -11,19 +11,19 @@
   include: tasks-youtrack-distribution.yml
   when:
     - init_file.stat.exists|bool == false
-    - youtrack_version_stripped.stdout not in outrack_installed_version.stdout
+    - youtrack_version_stripped.stdout not in youtrack_installed_version.stdout
 
 - name: "Include config tasks"
   include: tasks-config.yml
   when:
     - init_file.stat.exists|bool == false
-    - youtrack_version_stripped.stdout not in outrack_installed_version.stdout
+    - youtrack_version_stripped.stdout not in youtrack_installed_version.stdout
 
 - name: "Include youtrack service tasks"
   include: tasks-youtrack-service.yml
   when:
     - init_file.stat.exists|bool == false
-    - youtrack_version_stripped.stdout not in outrack_installed_version.stdout
+    - youtrack_version_stripped.stdout not in youtrack_installed_version.stdout
 
 - name: "YouTrack | Apache vhost tasks"
   shell: "echo 'notify apache handler'"
