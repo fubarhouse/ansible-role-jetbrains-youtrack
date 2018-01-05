@@ -26,6 +26,7 @@
         state: installed
       with_items:
         - rsync
+        - systemctl
         - unzip
       failed_when: false
       changed_when: false
