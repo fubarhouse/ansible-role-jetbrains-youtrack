@@ -1,5 +1,13 @@
 ---
 
+- name: "YouTrack | Specify variable for specific version"
+  shell: "echo {{ youtrack_version }} | cut -d. -f3"
+  register: youtrack_version_stripped
+  changed_when: false
+  failed_when: false
+  tags:
+  - youtrack
+
 - name: "YouTrack | Detect installation"
   stat:
     path: /etc/init.d/youtrack
@@ -7,8 +15,8 @@
   changed_when: false
   failed_when: false
 
-- name: "YouTrack | Get version"
-  shell:  /etc/init.d/youtrack version
+- name: "YouTrack | Detect version"
+  shell: "cat {{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/VERSION.txt"
   register: youtrack_installed_version
   changed_when: false
   failed_when: false

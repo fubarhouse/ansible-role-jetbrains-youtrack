@@ -31,13 +31,6 @@
   tags:
   - youtrack
 
-- name: "YouTrack | Specify variable for specific version"
-  shell: "echo {{ youtrack_version }} | cut -d. -f3"
-  register: youtrack_version_stripped
-  failed_when: false
-  tags:
-  - youtrack
-
 - name: "YouTrack | Locate configuration file"
   stat:
     path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
