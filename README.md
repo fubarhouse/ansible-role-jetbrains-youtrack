@@ -12,7 +12,6 @@
 
     youtrack_domain: youtrack.vagrant.dev
     youtrack_version: 7.0.27965
-    youtrack_webserver: nginx
 
 ## Dependencies
 
