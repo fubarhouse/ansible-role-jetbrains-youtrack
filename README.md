@@ -10,8 +10,14 @@
 
 ## Role Variables
 
-    youtrack_domain: youtrack.vagrant.dev
-    youtrack_version: 7.0.27965
+```yaml
+# Version of YouTrack to use
+youtrack_version: 2017.4.38399
+# Installation path
+youtrack_install_dir: /usr/local/youtrack
+# Port to configure for use.
+youtrack_port: 8114
+```
 
 ## Dependencies
 
@@ -20,7 +26,6 @@
 ## Installation
 
   * Add the role to your playbook.
-  * Execute `ansible-galaxy install geerlingguy.java`
   * Modify above variables as desired.
   * Run your playbook, or `test.yml` from the tests folder.
 
