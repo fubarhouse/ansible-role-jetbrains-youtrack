@@ -1,11 +1,4 @@
 ---
 
-#- name: "YouTrack | Service | Stop"
-#  service:
-#    name: youtrack
-#    state: stopped
-#
-#- name: "YouTrack | Service | Start"
-#  service:
-#    name: youtrack
-#    state: started
+- name: "Start YouTrack"
+  shell: /etc/init.d/youtrack start

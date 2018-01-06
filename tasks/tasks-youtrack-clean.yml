@@ -2,6 +2,7 @@
 
 - name: "YouTrack | Stop service"
   shell: '/etc/init.d/youtrack stop'
+  failed_when: false
 
 - name: "YouTrack | Removing init.d script"
   file:
