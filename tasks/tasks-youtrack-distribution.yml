@@ -29,4 +29,7 @@
   stat:
     path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/conf/internal/bundle.properties"
   register: youtrack_config
-  failed_when: false
+
+- name: "YouTrack | Configure for use"
+  shell: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/bin/youtrack.sh configure --listen-port {{ youtrack_port }} --base-url {{ youtrack_domain }}"
+  register: youtrack_config

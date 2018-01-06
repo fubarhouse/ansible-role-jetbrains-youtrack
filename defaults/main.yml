@@ -7,3 +7,4 @@ youtrack_version: 2017.4
 youtrack_build: 38399
 youtrack_install_dir: /usr/local/youtrack
 youtrack_port: 8114
+youtrack_domain: http://localhost

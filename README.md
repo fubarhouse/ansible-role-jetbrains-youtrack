@@ -20,6 +20,8 @@ youtrack_build: 38399
 youtrack_install_dir: /usr/local/youtrack
 # Port to configure for use.
 youtrack_port: 8114
+# YouTrack URL
+youtrack_domain: http://localhost
 ```
 
 ## Dependencies
