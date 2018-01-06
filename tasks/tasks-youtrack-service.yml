@@ -13,21 +13,3 @@
 #  service:
 #    name: youtrack
 #    state: started
-
-- name: "YouTrack | Re-locate configuration file"
-  stat:
-    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/conf/internal/bundle.properties"
-  register: youtrack_config_recheck
-  failed_when: false
-
-- name: "YouTrack | Setup port in configuration"
-  become: yes
-  become_user: root
-  replace:
-    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/conf/internal/bundle.properties"
-    regexp: "8080"
-    replace: "{{ youtrack_port }}"
-  tags: ['youtrack']
-  notify:
-    - "Stop YouTrack"
-    - "Start YouTrack"

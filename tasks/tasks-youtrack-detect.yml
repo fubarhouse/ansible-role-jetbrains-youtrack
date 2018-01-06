@@ -8,7 +8,7 @@
   failed_when: false
 
 - name: "YouTrack | Detect version"
-  shell: "cat {{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/VERSION.txt"
+  shell: "cat {{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/VERSION.txt"
   register: youtrack_installed_version
   changed_when: false
   failed_when: false

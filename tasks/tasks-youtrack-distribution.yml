@@ -4,8 +4,8 @@
   become: yes
   become_user: root
   get_url:
-    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.zip"
-    dest: "/tmp/youtrack-{{ youtrack_version }}.zip"
+    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
+    dest: "/tmp/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
     validate_certs: no
   tags:
   - youtrack
@@ -25,7 +25,7 @@
   become: yes
   become_user: root
   unarchive:
-    src: "/tmp/youtrack-{{ youtrack_version }}.zip"
+    src: "/tmp/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
     dest: "{{ youtrack_install_dir }}"
     copy: "no"
   tags:
@@ -33,6 +33,6 @@
 
 - name: "YouTrack | Locate configuration file"
   stat:
-    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/conf/internal/bundle.properties"
+    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/conf/internal/bundle.properties"
   register: youtrack_config
   failed_when: false

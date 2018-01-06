@@ -13,7 +13,9 @@
 
 ```yaml
 # Version of YouTrack to use
-youtrack_version: 2017.4.38399
+youtrack_version: 2017.4
+# Build number of the version to use
+youtrack_build: 38399
 # Installation path
 youtrack_install_dir: /usr/local/youtrack
 # Port to configure for use.

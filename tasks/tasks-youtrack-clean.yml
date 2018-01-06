@@ -4,7 +4,7 @@
   become: yes
   become_user: root
   shell: '/etc/init.d/youtrack stop'
-  when: '"{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
+  when: '"{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}.{{ youtrack_build }}"'
 
 - name: "YouTrack | Uninstall"
   become: yes
@@ -12,4 +12,4 @@
   file:
     path: "{{ youtrack_install_dir }}"
     state: absent
-  when: '"{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
+  when: '"{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}.{{ youtrack_build }}"'

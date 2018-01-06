@@ -14,7 +14,7 @@
 . /etc/rc.d/init.d/functions
 
 YOUTRACK_USER=youtrack
-YOUTRACK_VERSION=$(echo {{ youtrack_version }})
+YOUTRACK_VERSION=$(echo {{ youtrack_version }}.{{ youtrack_build }})
 YOUTRACK_DIR={{ youtrack_install_dir }}/youtrack-$YOUTRACK_VERSION/
 YOUTRACK_PATH=$YOUTRACK_DIR/bin/youtrack.sh
 
