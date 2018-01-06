@@ -16,7 +16,7 @@
 
 - name: "YouTrack | Re-locate configuration file"
   stat:
-    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/conf/internal/bundle.properties"
   register: youtrack_config_recheck
   failed_when: false
   when: youtrack_config.stat.exists|bool == false
@@ -25,7 +25,7 @@
   become: yes
   become_user: root
   replace:
-    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+    dest: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/conf/internal/bundle.properties"
     regexp: "8080"
     replace: "{{ youtrack_port }}"
   when: youtrack_config_recheck is defined and youtrack_config_recheck.stat.exists

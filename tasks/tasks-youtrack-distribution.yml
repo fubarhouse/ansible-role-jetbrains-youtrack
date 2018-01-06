@@ -33,6 +33,6 @@
 
 - name: "YouTrack | Locate configuration file"
   stat:
-    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}/conf/internal/bundle.properties"
   register: youtrack_config
   failed_when: false
