@@ -1,7 +1,7 @@
 #!/bin/bash
 
 YOUTRACK_USER=youtrack
-YOUTRACK_VERSION=$(echo {{ youtrack_version }} | cut -d. -f3)
+YOUTRACK_VERSION=$(echo {{ youtrack_version }})
 YOUTRACK_DIR={{ youtrack_install_dir }}/youtrack-$YOUTRACK_VERSION/
 YOUTRACK_PATH=$YOUTRACK_DIR/bin/youtrack.sh
 
