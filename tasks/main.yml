@@ -3,24 +3,30 @@
 - name: "Include detection tasks"
   include: tasks-youtrack-detect.yml
 
-#- name: "Include clean-up tasks"
-#  include: tasks-youtrack-clean.yml
-#  when: 'youtrack_status is defined and "{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}.{{ youtrack_build }}"'
+- name: "Include clean-up tasks"
+  include: tasks-youtrack-clean.yml
+  when:
+    - init_file.stat|bool == true
+    - youtrack_version not in youtrack_installed_version.stdout
+    - youtrack_build not in youtrack_installed_build.stdout
 
 - name: "Include youtrack distribution tasks"
   include: tasks-youtrack-distribution.yml
   when:
     - init_file.stat.exists|bool == false
-    - youtrack_version + "." + youtrack_build not in youtrack_installed_version.stdout
+    - youtrack_version not in youtrack_installed_version.stdout
+    - youtrack_build not in youtrack_installed_build.stdout
 
 - name: "Include config tasks"
   include: tasks-config.yml
   when:
     - init_file.stat.exists|bool == false
-    - youtrack_version + "." + youtrack_build not in youtrack_installed_version.stdout
+    - youtrack_version not in youtrack_installed_version.stdout
+    - youtrack_build not in youtrack_installed_build.stdout
 
 - name: "Include youtrack service tasks"
   include: tasks-youtrack-service.yml
   when:
     - init_file.stat.exists|bool == false
-    - youtrack_version + "." + youtrack_build not in youtrack_installed_version.stdout
+    - youtrack_version not in youtrack_installed_version.stdout
+    - youtrack_build not in youtrack_installed_build.stdout
