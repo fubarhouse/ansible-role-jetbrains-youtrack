@@ -1,12 +1,5 @@
 ---
 
-- name: "Config | Create directories"
-  file:
-    path: "{{ youtrack_install_dir }}"
-    state: directory
-    mode: 0777
-    recurse: true
-
 - name: "Config | Include OS-specific tasks for Debian/Ubuntu"
   include: tasks-config-debian.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
