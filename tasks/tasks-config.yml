@@ -1,33 +1,11 @@
 ---
 
-- name: "Config | Create user group"
-  become: yes
-  become_user: root
-  group:
-    name: youtrack
-    state: present
-
-- name: "Config | Add users"
-  become: yes
-  become_user: root
-  user:
-    name: youtrack
-    shell: /bin/false
-    state: present
-    group: youtrack
-
 - name: "Config | Create directories"
-  become: yes
-  become_user: root
   file:
-    path: "{{ item }}"
+    path: "{{ youtrack_install_dir }}"
     state: directory
-    owner: youtrack
-    group: youtrack
     mode: 0777
     recurse: true
-  with_items:
-    - "{{ youtrack_install_dir }}"
 
 - name: "Config | Include OS-specific tasks for Debian/Ubuntu"
   include: tasks-config-debian.yml

@@ -1,8 +1,6 @@
 ---
 
 - name: "YouTrack | Get distribution"
-  become: yes
-  become_user: root
   get_url:
     url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
     dest: "/tmp/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
@@ -11,8 +9,6 @@
   - youtrack
 
 - name: "YouTrack | Ensure directory is writable"
-  become: yes
-  become_user: root
   file:
     path: "{{ youtrack_install_dir }}"
     state: directory
@@ -22,8 +18,6 @@
   - youtrack
 
 - name: "YouTrack | Unpack distribution"
-  become: yes
-  become_user: root
   unarchive:
     src: "/tmp/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
     dest: "{{ youtrack_install_dir }}"

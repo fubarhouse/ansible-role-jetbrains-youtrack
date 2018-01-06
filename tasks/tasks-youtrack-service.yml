@@ -1,15 +1,11 @@
 ---
 
 #- name: "YouTrack | Service | Stop"
-#  become: yes
-#  become_user: root
 #  service:
 #    name: youtrack
 #    state: stopped
 #
 #- name: "YouTrack | Service | Start"
-#  become: yes
-#  become_user: root
 #  service:
 #    name: youtrack
 #    state: started
