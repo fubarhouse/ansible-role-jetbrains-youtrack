@@ -1,29 +1,14 @@
 ---
 
-- name: "YouTrack | Get distribution"
-  get_url:
-    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
-    dest: "/tmp/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
-    validate_certs: no
-  tags:
-  - youtrack
-
-- name: "YouTrack | Ensure directory is writable"
-  file:
-    path: "{{ youtrack_install_dir }}"
-    state: directory
-    mode: 0755
-    recurse: true
-  tags:
-  - youtrack
-
-- name: "YouTrack | Unpack distribution"
+- name: "YouTrack | Download and extract distribution"
   unarchive:
-    src: "/tmp/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
-    dest: "{{ youtrack_install_dir }}"
-    copy: "no"
-  tags:
-  - youtrack
+    src: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
+    dest: "/usr/local"
+    remote_src: yes
+    validate_certs: no
+
+- name: "YouTrack | Renaming destination folder"
+  shell: "mv /usr/local/youtrack-{{ youtrack_version }}.{{ youtrack_build }} {{ youtrack_install_dir }}"
 
 - name: "YouTrack | Locate configuration file"
   stat:
