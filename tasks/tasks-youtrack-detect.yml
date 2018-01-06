@@ -8,13 +8,13 @@
   failed_when: false
 
 - name: "YouTrack | Detect version number"
-  shell: "cat {{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/internal/conf/bundle_build.properties | grep product.version | cut -d= -f2"
+  shell: "cat {{ youtrack_install_dir }}/internal/conf/bundle_build.properties | grep product.version | cut -d= -f2"
   register: youtrack_installed_version
   changed_when: false
   failed_when: false
 
 - name: "YouTrack | Detect build number"
-  shell: "cat {{ youtrack_install_dir }}/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/internal/conf/bundle_build.properties | grep product.build | cut -d= -f2"
+  shell: "cat {{ youtrack_install_dir }}/internal/conf/bundle_build.properties | grep product.build | cut -d= -f2"
   register: youtrack_installed_build
   changed_when: false
   failed_when: false
