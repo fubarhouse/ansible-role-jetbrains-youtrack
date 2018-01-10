@@ -7,8 +7,18 @@
     remote_src: yes
     validate_certs: no
 
-- name: "YouTrack | Renaming destination folder"
-  shell: "mv /usr/local/youtrack-{{ youtrack_version }}.{{ youtrack_build }} {{ youtrack_install_dir }}"
+- name: "YouTrack | Ensure installation path exists"
+  file:
+    path: "{{ youtrack_install_dir }}"
+    state: directory
+
+- name: "YouTrack | Moving data to destination"
+  shell: "mv /usr/local/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/* {{ youtrack_install_dir }}"
+
+- name: "YouTrack | Removing old distribution location"
+  file:
+    path: "/usr/local/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/"
+    state: absent
 
 - name: "YouTrack | Locate configuration file"
   stat:
