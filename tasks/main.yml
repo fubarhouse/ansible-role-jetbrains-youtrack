@@ -3,6 +3,7 @@
 - name: Ensure a valid version and build is configured.
   shell: "curl -I http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
   register: curl_youtrack_zip
+  changed_when: false
   failed_when: '"200 OK" not in curl_youtrack_zip.stdout and "302 Moved Temporarily" not in curl_youtrack_zip.stdout'
 
 - name: "Include detection tasks"
