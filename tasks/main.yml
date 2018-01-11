@@ -36,3 +36,4 @@
     - init_file.stat.exists|bool == false
     - youtrack_version|string not in youtrack_installed_version.stdout
     - youtrack_build|string not in youtrack_installed_build.stdout
+    - youtrack_start|bool == true
