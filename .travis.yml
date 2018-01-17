@@ -126,12 +126,12 @@ script:
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --syntax-check'
 
   # Test role.
-  - 'travis_wait 60 docker exec "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --sudo --verbose'
+  - 'travis_wait 60 docker exec "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --sudo'
 
   - idempotence=$(mktemp)
   - >
     docker exec "$(cat ${container_id})"
-    ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --sudo --verbose
+    ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --sudo
     | tee -a ${idempotence}
   - >
     tail ${idempotence}
