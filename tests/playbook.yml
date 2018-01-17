@@ -21,6 +21,7 @@
       with_items:
         - curl
         - initscripts
+        - libcurl3
         - rsync
         - unzip
       failed_when: false
