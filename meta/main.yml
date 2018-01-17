@@ -12,26 +12,30 @@ galaxy_info:
     - jetbrains
     - team
     - youtrack
-    - ubuntu
   platforms:
-  - name: Ubuntu
-    versions:
-    - all
-    - lucid
-    - maverick
-    - natty
-    - oneiric
-    - precise
-    - quantal
-    - raring
-    - saucy
-    - trusty
-    - utopic
-    - vivid
-    - wily
-  - name: Debian
-    versions:
-    - all
+    - name: Ubuntu
+      versions:
+        - artful
+        - zesty
+        - yakkety
+        - xenial
+        - vivid
+        - wily
+        - utopic
+        - trusty
+        - saucy
+        - raring
+        - quantal
+        - precise
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+        - stretch
   categories:
   - development
   - system
