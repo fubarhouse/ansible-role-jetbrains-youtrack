@@ -1,30 +1,39 @@
 ---
 
-- name: "Include setup tasks"
-  include: tasks-initial.yml
+- name: Ensure a valid version and build is configured.
+  shell: "curl -I http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
+  register: curl_youtrack_zip
+  changed_when: false
+  failed_when: '"200 OK" not in curl_youtrack_zip.stdout and "302 Moved Temporarily" not in curl_youtrack_zip.stdout'
 
 - name: "Include detection tasks"
   include: tasks-youtrack-detect.yml
 
 - name: "Include clean-up tasks"
   include: tasks-youtrack-clean.yml
-  when: 'youtrack_status is defined and "{{ youtrack_installed_version.stdout }}" != "{{ youtrack_version }}"'
+  when:
+    - init_file.stat|bool == true
+    - youtrack_version|string not in youtrack_installed_version.stdout
+    - youtrack_build|string not in youtrack_installed_build.stdout
 
 - name: "Include youtrack distribution tasks"
   include: tasks-youtrack-distribution.yml
+  when:
+    - init_file.stat.exists|bool == false
+    - youtrack_version|string not in youtrack_installed_version.stdout
+    - youtrack_build|string not in youtrack_installed_build.stdout
 
 - name: "Include config tasks"
   include: tasks-config.yml
+  when:
+    - init_file.stat.exists|bool == false
+    - youtrack_version|string not in youtrack_installed_version.stdout
+    - youtrack_build|string not in youtrack_installed_build.stdout
 
 - name: "Include youtrack service tasks"
   include: tasks-youtrack-service.yml
-
-- name: "YouTrack | Apache vhost tasks"
-  shell: "echo 'notify apache handler'"
-  notify: vhosts-apache
-  when: fubarhouse_webserver is defined and fubarhouse_webserver == 'apache2'
-
-- name: "YouTrack | NGINX vhost tasks"
-  shell: "echo 'notify nginx handler'"
-  notify: vhosts-nginx
-  when: fubarhouse_webserver is defined and fubarhouse_webserver == 'nginx'
+  when:
+    - init_file.stat.exists|bool == false
+    - youtrack_version|string not in youtrack_installed_version.stdout
+    - youtrack_build|string not in youtrack_installed_build.stdout
+    - youtrack_start|bool == true

@@ -1,38 +1,9 @@
 ---
 
-- name: "Config | Create user group"
-  become: yes
-  become_user: root
-  group:
-    name: youtrack
-    state: present
-
-- name: "Config | Add users"
-  become: yes
-  become_user: root
-  user:
-    name: youtrack
-    shell: /bin/false
-    state: present
-    group: youtrack
-
-- name: "Config | Create directories"
-  become: yes
-  become_user: root
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: youtrack
-    group: youtrack
-    mode: 0777
-    recurse: true
-  with_items:
-    - "{{ youtrack_install_dir }}"
-
 - name: "Config | Include OS-specific tasks for Debian/Ubuntu"
   include: tasks-config-debian.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: "Config | Include OS-specific tasks for RedHat/CentOS/REHL"
   include: tasks-config-redhat.yml
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family == 'RedHat'

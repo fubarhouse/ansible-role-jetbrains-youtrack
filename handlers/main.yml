@@ -1,2 +1,11 @@
 ---
 # handlers file for fubarhouse.youtrack
+
+- name: "Restart YouTrack"
+  shell: /etc/init.d/youtrack restart
+
+- name: "Start YouTrack"
+  shell: /etc/init.d/youtrack start
+
+- name: "Stop YouTrack"
+  shell: /etc/init.d/youtrack stop

@@ -1,20 +1,17 @@
 ---
 # defaults file for fubarhouse.youtrack
 
-# General config - Unless you use your own configurations or have
-# forked this role, changing paths will break the role.
-
-youtrack_install_dir: /usr/local/youtrack
-youtrack_domain: youtrack.vagrant.dev
-youtrack_port: 8114
-
 # YouTrack
 
-youtrack_version: 7.0.27965
-youtrack_webserver: nginx
+youtrack_version: 2017.4
+youtrack_build: 38399
+youtrack_install_dir: /usr/local/youtrack
+youtrack_port: 8114
+youtrack_domain: http://localhost
 
-fubarhouse_vhosts:
-- name: youtrack
-  domain: "{{ youtrack_domain }}"
-  docroot: "{{ youtrack_install_dir }}"
-  port: "{{ youtrack_port }}"
+# Fedora tests are failing for init.d scripts via Travis.
+# Running these same tests via Docker does not fail.
+# youtrack_start will prevent the init.d start script froom
+# running. This variable will not be advertised anywhere.
+
+youtrack_start: true

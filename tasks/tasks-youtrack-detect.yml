@@ -1,16 +1,20 @@
 ---
 
-- name: "YouTrack | Looking for initialisation script"
+- name: "YouTrack | Detect installation"
   stat:
     path: /etc/init.d/youtrack
   register: init_file
+  changed_when: false
+  failed_when: false
 
-- name: "YouTrack | Detect installation"
-  shell:  sudo /etc/init.d/youtrack status
-  register: youtrack_status
-  when: '"{{ init_file.stat.exists }}" == true'
-
-- name: "YouTrack | Get version"
-  shell:  sudo /etc/init.d/youtrack version
+- name: "YouTrack | Detect version number"
+  shell: "cat {{ youtrack_install_dir }}/internal/conf/bundle_build.properties | grep product.version | cut -d= -f2"
   register: youtrack_installed_version
-  when: '"{{ init_file.stat.exists }}" == true'
+  changed_when: false
+  failed_when: false
+
+- name: "YouTrack | Detect build number"
+  shell: "cat {{ youtrack_install_dir }}/internal/conf/bundle_build.properties | grep product.build | cut -d= -f2"
+  register: youtrack_installed_build
+  changed_when: false
+  failed_when: false

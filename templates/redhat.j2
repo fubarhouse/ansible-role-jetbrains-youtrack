@@ -13,9 +13,7 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-YOUTRACK_USER=youtrack
-YOUTRACK_VERSION=$(echo {{ youtrack_version }} | cut -d. -f3)
-YOUTRACK_DIR={{ youtrack_install_dir }}/youtrack-$YOUTRACK_VERSION/
+YOUTRACK_DIR="{{ youtrack_install_dir }}/"
 YOUTRACK_PATH=$YOUTRACK_DIR/bin/youtrack.sh
 
 case $1 in

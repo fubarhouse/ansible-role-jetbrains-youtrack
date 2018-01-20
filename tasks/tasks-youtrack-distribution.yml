@@ -1,47 +1,30 @@
 ---
 
-- name: "YouTrack | Get distribution"
-  become: yes
-  become_user: root
-  get_url:
-    url: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.zip"
-    dest: "/tmp/youtrack-{{ youtrack_version }}.zip"
+- name: "YouTrack | Download and extract distribution"
+  unarchive:
+    src: "http://download.jetbrains.com/charisma/youtrack-{{ youtrack_version }}.{{ youtrack_build }}.zip"
+    dest: "/usr/local"
+    remote_src: yes
     validate_certs: no
-  tags:
-  - youtrack
 
-- name: "YouTrack | Ensure directory is writable"
-  become: yes
-  become_user: root
+- name: "YouTrack | Ensure installation path exists"
   file:
     path: "{{ youtrack_install_dir }}"
     state: directory
-    owner: "{{ fubarhouse_user }}"
-    group: "{{ fubarhouse_user }}"
-    mode: 0755
-    recurse: true
-  tags:
-  - youtrack
 
-- name: "YouTrack | Unpack distribution"
-  become: yes
-  become_user: root
-  unarchive:
-    src: "/tmp/youtrack-{{ youtrack_version }}.zip"
-    dest: "{{ youtrack_install_dir }}"
-    copy: "no"
-  tags:
-  - youtrack
+- name: "YouTrack | Moving data to destination"
+  shell: "mv /usr/local/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/* {{ youtrack_install_dir }}"
 
-- name: "YouTrack | Specify variable for specific version"
-  shell: "echo {{ youtrack_version }} | cut -d. -f3"
-  register: youtrack_version_stripped
-  failed_when: false
-  tags:
-  - youtrack
+- name: "YouTrack | Removing old distribution location"
+  file:
+    path: "/usr/local/youtrack-{{ youtrack_version }}.{{ youtrack_build }}/"
+    state: absent
 
 - name: "YouTrack | Locate configuration file"
   stat:
-    path: "{{ youtrack_install_dir }}/youtrack-{{ youtrack_version_stripped.stdout }}/conf/internal/bundle.properties"
+    path: "{{ youtrack_install_dir }}/conf/internal/bundle.properties"
   register: youtrack_config
-  failed_when: false
+
+- name: "YouTrack | Configure for use"
+  shell: "{{ youtrack_install_dir }}/bin/youtrack.sh configure --listen-port {{ youtrack_port }} --base-url {{ youtrack_domain }}"
+  register: youtrack_config
