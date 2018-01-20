@@ -32,7 +32,7 @@ youtrack_domain: http://localhost
 
   * Add the role to your playbook.
   * Modify above variables as desired.
-  * Run your playbook, or `test.yml` from the tests folder.
+  * Run your playbook, or `playbook.yml` from the tests folder.
 
 ## License
 
