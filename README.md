@@ -1,6 +1,6 @@
 # Ansible Role: YouTrack
 
-[![Build Status](https://travis-ci.org/fubarhouse/ansible-role-youtrack.svg?branch=master)](https://travis-ci.org/fubarhouse/ansible-role-youtrack)
+[![Build Status](https://travis-ci.org/fubarhouse/ansible-role-jetbrains-youtrack.svg?branch=master)](https://travis-ci.org/fubarhouse/ansible-role-jetbrains-youtrack)
 [![Ansible Galaxy](https://img.shields.io/ansible/role/14002.svg)](https://galaxy.ansible.com/fubarhouse/jetbrains-youtrack)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/fubarhouse/ansible-role-youtrack/master/LICENSE)
 
