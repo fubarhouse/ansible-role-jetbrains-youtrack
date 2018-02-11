@@ -40,7 +40,7 @@ galaxy_info:
         - wily
         - vivid
         - xenial
-        - yakkety
+#        - yakkety
         - zesty
         - artful
         - bionic
