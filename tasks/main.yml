@@ -7,31 +7,31 @@
   failed_when: '"200 OK" not in curl_youtrack_zip.stdout and "302 Moved Temporarily" not in curl_youtrack_zip.stdout'
 
 - name: "Include detection tasks"
-  include: tasks-youtrack-detect.yml
+  include_tasks: tasks-youtrack-detect.yml
 
 - name: "Include clean-up tasks"
-  include: tasks-youtrack-clean.yml
+  include_tasks: tasks-youtrack-clean.yml
   when:
     - init_file.stat|bool == true
     - youtrack_version|string not in youtrack_installed_version.stdout
     - youtrack_build|string not in youtrack_installed_build.stdout
 
 - name: "Include youtrack distribution tasks"
-  include: tasks-youtrack-distribution.yml
+  include_tasks: tasks-youtrack-distribution.yml
   when:
     - init_file.stat.exists|bool == false
     - youtrack_version|string not in youtrack_installed_version.stdout
     - youtrack_build|string not in youtrack_installed_build.stdout
 
 - name: "Include config tasks"
-  include: tasks-config.yml
+  include_tasks: tasks-config.yml
   when:
     - init_file.stat.exists|bool == false
     - youtrack_version|string not in youtrack_installed_version.stdout
     - youtrack_build|string not in youtrack_installed_build.stdout
 
 - name: "Include youtrack service tasks"
-  include: tasks-youtrack-service.yml
+  include_tasks: tasks-youtrack-service.yml
   when:
     - init_file.stat.exists|bool == false
     - youtrack_version|string not in youtrack_installed_version.stdout
